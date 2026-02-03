@@ -1,0 +1,39 @@
+# Target Stats
+target_stats: ["PTS", "REB", "AST"]
+
+# Data Collection
+data:
+  seasons: ["2022-23", "2023-24", "2024-25"]
+  train_seasons: ["2022-23", "2023-24"]  # ~164 games per player
+  test_season: "2024-25"  # Current season - live validation
+  min_games: 15  # Minimum games played to include player
+  min_minutes: 20  # Minimum average minutes per game
+
+# Features
+features:
+  rolling_windows: [5, 10, 15]  # Rolling average windows
+  include_home_away: true
+  include_rest_days: true
+  include_opponent_defense: true
+  include_back_to_back: true
+  include_last_matchup: true
+
+# Models
+models:
+  algorithm: "xgboost"  # xgboost, lightgbm, random_forest
+  test_size: 0.2
+  random_state: 42
+  cv_folds: 5
+
+# Backtesting
+backtesting:
+  start_season: "2023-24"
+  metrics: ["mae", "rmse", "r2", "accuracy"]
+  
+# Paths
+paths:
+  data_dir: "./data"
+  raw_dir: "./data/raw"
+  processed_dir: "./data/processed"
+  models_dir: "./models"
+  results_dir: "./results"
