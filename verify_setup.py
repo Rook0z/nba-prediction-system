@@ -1,8 +1,3 @@
-"""
-Setup Verification Script
-Run this to verify your project is set up correctly
-"""
-
 import os
 import sys
 
