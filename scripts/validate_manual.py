@@ -1,8 +1,3 @@
-"""
-Manual Prediction Validation
-For when you manually enter actual results from ESPN/NBA.com
-"""
-
 import pandas as pd
 from datetime import datetime
 import os
@@ -49,7 +44,6 @@ def create_validation_template(predictions_df, output_file='./results/validation
             f"Available columns: {df.columns.tolist()}"
         )
 
-    # Rename to standard validation schema
     df = df.rename(columns=required_columns)
 
     # -------------------------------------------------
