@@ -1,13 +1,9 @@
-"""
-Live Prediction Validation
-Compare today's predictions against actual game results
-"""
-
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
 from nba_api.stats.endpoints import scoreboardv2, playergamelog
 from nba_api.stats.static import players
+import glob
 import time
 import os
 
@@ -45,15 +41,12 @@ class PredictionValidator:
         print("LOADING PREDICTIONS")
         print("="*60)
         
-        # Try to find prediction file
         prediction_file = f"{self.predictions_dir}/predictions_{prediction_date}.csv"
         
         if not os.path.exists(prediction_file):
             print(f"✗ Prediction file not found: {prediction_file}")
             print("\nTrying to find most recent prediction file...")
             
-            # Find most recent prediction file
-            import glob
             files = glob.glob(f"{self.predictions_dir}/predictions_*.csv")
             if files:
                 prediction_file = max(files, key=os.path.getctime)
@@ -203,7 +196,6 @@ class PredictionValidator:
             else:
                 print(f"  ✗ No game data found (DNP or not played yet)")
             
-            # Rate limiting
             time.sleep(0.6)  # NBA API rate limit
         
         if not results:
@@ -384,7 +376,6 @@ class PredictionValidator:
         # Calculate metrics
         metrics = self.calculate_validation_metrics(results_df)
         
-        # Print report
         self.print_validation_report(results_df, metrics)
         
         # Save results
@@ -402,7 +393,6 @@ if __name__ == "__main__":
     
     validator = PredictionValidator()
     
-    # Allow date as command line argument
     if len(sys.argv) > 1:
         game_date = sys.argv[1]  # Format: YYYY-MM-DD
         print(f"Validating predictions for: {game_date}")
