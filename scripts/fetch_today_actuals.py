@@ -1,8 +1,3 @@
-"""
-Fetch today's NBA player actual stats and save to CSV
-NBA API safe version (handles V3 edge cases)
-"""
-
 from nba_api.stats.endpoints import scoreboardv3, boxscoretraditionalv3
 from nba_api.stats.static import teams
 from datetime import datetime
@@ -69,7 +64,6 @@ def get_valid_game_ids():
     board = scoreboardv3.ScoreboardV3(game_date=today)
     games = board.game_header.get_data_frame()
 
-    # Keep only games that have started
     valid = games[
         games["gameStatus"].isin([2, 3])  # 2 = Live, 3 = Final
     ]
