@@ -1,8 +1,3 @@
-"""
-Points Model
-XGBoost model specifically for predicting player points
-"""
-
 import xgboost as xgb
 from src.models.base_model import BaseModel
 from datetime import datetime
@@ -18,7 +13,6 @@ class PointsModel(BaseModel):
         Args:
             model_params (dict): XGBoost hyperparameters
         """
-        # Default parameters optimized for points prediction
         default_params = {
             'objective': 'reg:squarederror',
             'n_estimators': 200,
