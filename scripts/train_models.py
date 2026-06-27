@@ -1,12 +1,6 @@
-"""
-Model Training Script
-Run this to train XGBoost models for all target statistics
-"""
-
 import sys
 import os
 
-# Add src directory to path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from src.models.trainer import ModelTrainer
