@@ -1,10 +1,6 @@
-"""
-Backtest Engine
-Run backtests on historical data to validate model performance
-"""
-
 import pandas as pd
 import numpy as np
+import json
 import yaml
 import os
 import pickle
@@ -32,7 +28,6 @@ class BacktestEngine:
         self.models = {}
         self.metrics = {}
         
-        # Create results directory
         os.makedirs(self.results_dir, exist_ok=True)
     
     def load_models(self):
@@ -197,10 +192,8 @@ class BacktestEngine:
                 results_df.to_csv(results_path, index=False)
                 print(f"✓ Results saved: {results_path}")
         
-        # Print summary
         self.print_backtest_summary(all_metrics)
-        
-        # Save summary metrics
+        s
         self.save_metrics_summary(all_metrics)
         
         return all_metrics
@@ -241,7 +234,6 @@ class BacktestEngine:
         Args:
             all_metrics (dict): Dictionary of BacktestMetrics
         """
-        import json
         
         summary = {}
         
