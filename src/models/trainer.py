@@ -1,8 +1,3 @@
-"""
-Model Trainer
-Handles training multiple models and managing the training pipeline
-"""
-
 import pandas as pd
 import numpy as np
 import yaml
@@ -88,7 +83,6 @@ class ModelTrainer:
         Returns:
             tuple: (X_train, y_train, X_test, y_test)
         """
-        # Columns to exclude
         exclude_cols = [
             'PLAYER_ID', 'PLAYER_NAME', 'TEAM_ABBREVIATION', 'GAME_ID',
             'GAME_DATE', 'MATCHUP', 'OPPONENT', 'SEASON',
@@ -184,7 +178,6 @@ class ModelTrainer:
         # Train model
         model.train(X_train, y_train, X_val, y_val)
         
-        # Print feature importance
         importance_df = model.get_feature_importance(top_n=15)
         if importance_df is not None:
             print(f"\n{'='*60}")
@@ -257,7 +250,6 @@ class ModelTrainer:
             model_path = f"{self.models_dir}/{stat.lower()}_model.pkl"
             model.save(model_path)
         
-        # Print summary
         self.print_training_summary()
         
         return self.models
