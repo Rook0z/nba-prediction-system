@@ -1,8 +1,3 @@
-"""
-NBA Data Collector
-Fetches player game logs, team stats, and schedule data from NBA API
-"""
-
 import pandas as pd
 import numpy as np
 from nba_api.stats.endpoints import playergamelogs, leaguegamefinder, teamgamelogs
@@ -249,7 +244,6 @@ class NBADataCollector:
                 print(f"  - Date range: {df['GAME_DATE'].min()} to {df['GAME_DATE'].max()}")
 
 
-# Usage example
 if __name__ == "__main__":
     collector = NBADataCollector()
     
