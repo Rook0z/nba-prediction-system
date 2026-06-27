@@ -1,8 +1,3 @@
-"""
-Feature Pipeline
-Orchestrates the complete feature engineering process
-"""
-
 import pandas as pd
 import numpy as np
 import yaml
@@ -69,13 +64,10 @@ class FeaturePipeline:
         
         initial_rows = len(df)
         
-        # Calculate game number for each player in each season
         df['PLAYER_GAME_NUM'] = df.groupby(['PLAYER_ID', 'SEASON']).cumcount() + 1
         
-        # Keep only games where player has played at least min_games
         df = df[df['PLAYER_GAME_NUM'] > min_games].copy()
         
-        # Drop the helper column
         df = df.drop('PLAYER_GAME_NUM', axis=1)
         
         rows_removed = initial_rows - len(df)
@@ -105,7 +97,6 @@ class FeaturePipeline:
         
         feature_cols = [col for col in df.columns if col not in id_cols + target_cols]
         
-        # Check for missing values
         missing = df[feature_cols].isnull().sum()
         missing = missing[missing > 0]
         
@@ -191,22 +182,16 @@ class FeaturePipeline:
         print(" "*20 + "FEATURE ENGINEERING PIPELINE")
         print("="*70)
         
-        # Load data
         df = self.load_processed_data()
         
-        # Create player features
         df = self.player_engineer.create_all_player_features(df)
         
-        # Create matchup features
         df = self.matchup_engineer.create_all_matchup_features(df)
         
-        # Remove early games without enough history
         df = self.remove_early_games(df, min_games=5)
         
-        # Handle missing values
         df = self.handle_missing_values(df)
         
-        # Get feature names
         feature_names = self.get_feature_names(df)
         
         # Create training/testing splits
