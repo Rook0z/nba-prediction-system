@@ -1,12 +1,6 @@
-"""
-Feature Engineering Script
-Run this after data collection to create all predictive features
-"""
-
 import sys
 import os
 
-# Add src directory to path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from src.features.feature_pipeline import FeaturePipeline
@@ -25,11 +19,10 @@ def main():
     """)
     
     try:
-        # Initialize and run pipeline
+        
         pipeline = FeaturePipeline()
         train_df, test_df, feature_names = pipeline.run_pipeline()
         
-        # Print feature breakdown
         print("\n" + "="*60)
         print("FEATURE BREAKDOWN")
         print("="*60)
