@@ -1,14 +1,10 @@
-"""
-Base Model Class
-Abstract base for all prediction models
-"""
-
 from abc import ABC, abstractmethod
 import pandas as pd
 import numpy as np
 import pickle
 import os
 from datetime import datetime
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 
 class BaseModel(ABC):
@@ -51,8 +47,6 @@ class BaseModel(ABC):
             dict: Evaluation metrics
         """
         predictions = self.predict(X)
-        
-        from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
         
         mae = mean_absolute_error(y, predictions)
         rmse = np.sqrt(mean_squared_error(y, predictions))
