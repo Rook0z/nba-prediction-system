@@ -1,8 +1,3 @@
-"""
-Predictor
-Generate predictions for upcoming NBA games
-"""
-
 import pandas as pd
 import numpy as np
 import pickle
@@ -105,7 +100,6 @@ class NBAPredictor:
             pd.DataFrame: Latest data per player
         """
         if 'GAME_DATE' not in df.columns:
-            # If no date, just get last record per player
             return df.groupby('PLAYER_ID').last().reset_index()
         
         # Get recent games
