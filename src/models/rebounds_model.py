@@ -1,8 +1,3 @@
-"""
-Rebounds Model
-XGBoost model specifically for predicting player rebounds
-"""
-
 import xgboost as xgb
 from src.models.base_model import BaseModel
 from datetime import datetime
@@ -18,7 +13,6 @@ class ReboundsModel(BaseModel):
         Args:
             model_params (dict): XGBoost hyperparameters
         """
-        # Default parameters optimized for rebounds prediction
         default_params = {
             'objective': 'reg:squarederror',
             'n_estimators': 200,
