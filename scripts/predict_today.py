@@ -1,14 +1,8 @@
-"""
-Daily Predictions Script
-Generate predictions for today's NBA games
-"""
-
 import sys
 import os
 import argparse
 from datetime import datetime
 
-# Add src directory to path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from src.prediction.predictor import NBAPredictor
