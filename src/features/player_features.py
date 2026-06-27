@@ -1,8 +1,3 @@
-"""
-Player Features Module
-Creates player-level features including rolling averages and recent performance
-"""
-
 import pandas as pd
 import numpy as np
 
@@ -36,8 +31,7 @@ class PlayerFeatureEngineer:
         print("="*60)
         
         df = df.sort_values(['PLAYER_ID', 'GAME_DATE']).reset_index(drop=True)
-        
-        # Stats to calculate rolling averages for
+        r
         all_stats = self.target_stats + self.additional_stats
         
         for window in self.rolling_windows:
