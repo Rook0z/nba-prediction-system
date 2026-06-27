@@ -1,12 +1,6 @@
-"""
-Backtest Script
-Run backtests to validate model performance on historical data
-"""
-
 import sys
 import os
 
-# Add src directory to path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from src.backtesting.backtest_engine import BacktestEngine
