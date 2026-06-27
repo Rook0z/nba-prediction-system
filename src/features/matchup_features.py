@@ -1,8 +1,3 @@
-"""
-Matchup Features Module
-Creates opponent and matchup-specific features
-"""
-
 import pandas as pd
 import numpy as np
 
@@ -71,7 +66,6 @@ class MatchupFeatureEngineer:
         print("="*60)
         
         for stat in self.target_stats:
-            # Average vs this opponent (last 5 games)
             df[f'{stat}_VS_OPP_L5'] = (
                 df.groupby(['PLAYER_ID', 'OPPONENT'])[stat]
                 .transform(lambda x: x.shift(1).rolling(window=5, min_periods=1).mean())
@@ -106,12 +100,6 @@ class MatchupFeatureEngineer:
             opp_col = f'OPP_DEF_RATING_{stat}'
             
             if opp_col in df.columns:
-                # Calculate league average defense per season
-                league_avg = df.groupby('SEASON')[opp_col].transform('mean')
-                
-                # Matchup difficulty: opponent defense relative to league average
-                # Positive = harder matchup (opponent allows less)
-                # Negative = easier matchup (opponent allows more)
                 df[f'{stat}_MATCHUP_DIFFICULTY'] = league_avg - df[opp_col]
                 features_created += 1
         
@@ -161,14 +149,12 @@ class MatchupFeatureEngineer:
         print("CREATING OPPONENT RECENT FORM FEATURES")
         print("="*60)
         
-        # Calculate opponent's trend (getting better/worse defensively)
         features_created = 0
         
         for stat in self.target_stats:
             opp_col = f'OPP_DEF_RATING_{stat}'
             
             if opp_col in df.columns:
-                # Opponent's defensive trend (last 5 games vs last 15 games)
                 df[f'{stat}_OPP_DEF_TREND'] = (
                     df.groupby(['OPPONENT', 'SEASON'])[opp_col]
                     .transform(lambda x: x.rolling(window=5, min_periods=1).mean() - 
@@ -199,7 +185,6 @@ class MatchupFeatureEngineer:
         print("="*60)
         print(f"Input shape: {df.shape}")
         
-        # Store initial column count
         initial_cols = df.shape[1]
         
         # Create features
