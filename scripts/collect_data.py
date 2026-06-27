@@ -1,12 +1,6 @@
-"""
-Main script to collect and process NBA data
-Run this script first to gather all necessary data
-"""
-
 import sys
 import os
 
-# Add src directory to path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from src.data.nba_collector import NBADataCollector
@@ -25,7 +19,6 @@ def main():
     ╚══════════════════════════════════════════════════════════╝
     """)
     
-    # Step 1: Collect raw data
     print("\n📥 STEP 1: COLLECTING RAW DATA FROM NBA API")
     print("-" * 60)
     
@@ -43,7 +36,6 @@ def main():
         print("3. Verify the seasons in config.yaml are valid")
         return
     
-    # Step 2: Process and clean data
     print("\n\n🔧 STEP 2: PROCESSING AND CLEANING DATA")
     print("-" * 60)
     
